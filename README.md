@@ -10,7 +10,7 @@ This repository contains the official release of simulation environments for the
 
 For business inquiries, please submit this form: [NVIDIA Research Licensing](https://www.nvidia.com/en-us/research/inquiries/)
 
-Built upon the [RoboCasa](https://github.com/robocasa/robocasa) simulation framework, this repository is a fork that extends its modular infrastructure to support the GR00T N1 model. We augment RoboCasa's core functionality with additional environments, assets, and tooling tailored for the GR-1 Tabletop tasks, enabling evaluation of generalist robotic policies in diverse household tasks.
+Built upon the [RoboCasa](https://github.com/robocasa/robocasa) simulation framework, this repository is a fork that extends its modular infrastructure to support the GR00T-N1.5-3B model. We augment RoboCasa's core functionality with additional environments, assets, and tooling tailored for the GR-1 Tabletop tasks, enabling evaluation of generalist robotic policies in diverse household tasks.
 
 -------
 
