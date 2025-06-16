@@ -64,7 +64,7 @@ python3 robocasa/scripts/playback_dataset.py --dataset <HDF5_FILE> --n 1
 
 This script replays the demonstration trajectories in simulation, rendering the robot’s actions and camera observations in sync. It’s a useful tool for visually inspecting the dataset and verifying its structure before using it for training or benchmarking.
 
-## Simulation-based Evaluation for GR00T-N1-2B
+## Simulation-based Evaluation for GR00T-N1.5-3B
 
 The main purpose of this repository is to evaluate the model in simulation to better understand its behavior in closed-loop settings. This is especially useful for assessing quantitative performance on long-horizon or multi-step tasks.
 
