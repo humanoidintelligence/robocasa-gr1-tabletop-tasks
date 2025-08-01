@@ -78,7 +78,7 @@ Inside the Isaac-GR00T repository, run the inference server:
 cd Isaac-GR00T
 python3 scripts/inference_service.py --server \
     --model_path <MODEL_PATH> \
-    --data_config gr1_arms_waist
+    --data_config fourier_gr1_arms_waist
 ```
 
 Inside the Isaac-GR00T repository, run the simulation evaluation script to evaluate a single task with 10 episodes.
