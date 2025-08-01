@@ -24,9 +24,11 @@ conda activate robocasa
 
 # 2. Clone and install Isaac-GR00T
 git clone https://github.com/NVIDIA/Isaac-GR00T.git
+cd Isaac-GR00T
 pip install --upgrade setuptools
-pip install -e Isaac-GR00T
+pip install -e .[base]
 pip install --no-build-isolation flash-attn==2.7.1.post4 
+cd ..
 
 # 3. Clone and install robosuite
 git clone https://github.com/ARISE-Initiative/robosuite.git
