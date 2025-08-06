@@ -126,7 +126,7 @@ gr1_unified/PosttrainPnPNovelFromTrayToTieredshelfSplitA_GR1ArmsAndWaistFourierH
 
 We are using the latest `GR00T-N1.5-3B` model from https://github.com/NVIDIA/Isaac-GR00T.git
 
-This example finetunes a series of tasks from the [Humanoid robot tabletop manipulation: 240k trajectories dataset](https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim). This runs on a H100 Node with 8 GPUs. Generally the zero-shot performance is already decent with average success rate of 43%, with this postraining it can reach higher success rate of 48%.
+This example finetunes a series of tasks from the [Humanoid robot tabletop manipulation: 240k trajectories dataset](https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim). This runs on a H100 Node with 8 GPUs. Generally the zero-shot performance is already decent with average success rate of 42%, with this postraining it can reach higher success rate of 47%.
 
 ```bash
 #!/bin/bash
