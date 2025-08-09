@@ -122,6 +122,28 @@ gr1_unified/PosttrainPnPNovelFromTrayToTieredbasketSplitA_GR1ArmsAndWaistFourier
 gr1_unified/PosttrainPnPNovelFromTrayToTieredshelfSplitA_GR1ArmsAndWaistFourierHands_Env
 ```
 
+## Post-training with Isaac-GR00T
+
+We are using the latest `GR00T-N1.5-3B` model from https://github.com/NVIDIA/Isaac-GR00T.git
+
+This example finetunes a series of tasks from the [Humanoid robot tabletop manipulation: 240k trajectories dataset](https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim). This runs on a H100 Node with 8 GPUs. Generally the zero-shot performance is already decent with average success rate of 42%, with this postraining it can reach higher success rate of 47%.
+
+```bash
+#!/bin/bash
+ALL_DATASET_PATHS=(
+  "YOUR_DATASET_PATH_1"
+  "YOUR_DATASET_PATH_2"
+)
+
+python scripts/gr00t_finetune.py \
+  --dataset-path "${ALL_DATASET_PATHS[@]}" \
+  --num-gpus 8 --batch-size 60 --learning_rate 3e-5 \
+  --output-dir OUTPUT_DIR \
+  --data-config fourier_gr1_arms_waist --embodiment_tag gr1 \
+  --tune-visual \ # tune visual encoder, can be omitted if you don't want to tune the visual encoder
+  --max-steps 30000 --save-steps 5000
+```
+
 ## Citation
 ```bibtex
 @misc{nvidia2025gr00tn1openfoundation,
