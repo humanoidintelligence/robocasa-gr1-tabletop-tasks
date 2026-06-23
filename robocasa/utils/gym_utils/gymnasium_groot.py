@@ -118,6 +118,22 @@ class GrootRoboCasaEnv(RoboCasaEnv):
         return obs
 
     def reset(self, seed=None, options=None):
+        # RoboCasa _reset_internal uses THREE random sources that gym's
+        # self.np_random does NOT control:
+        #   1. Python `random` module (global)
+        #   2. global `np.random`
+        #   3. robosuite's self.rng (np.random.Generator, set once in __init__)
+        if seed is not None:
+            import random as _random
+            _random.seed(seed)
+            import numpy as _np
+            _np.random.seed(seed)
+            # Re-seed robosuite's self.rng (used by _reset_internal via self.rng.choice/uniform)
+            uw = self
+            while hasattr(uw, 'env'):
+                uw = uw.env
+            if hasattr(uw, 'rng'):
+                uw.rng = _np.random.default_rng(seed)
         raw_obs, info = super().reset(seed=seed, options=options)
         obs = self.get_groot_observation(raw_obs)
         return obs, info

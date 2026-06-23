@@ -4,6 +4,17 @@
   <img width="95.0%" src="images/fig_task_v6.png">
 </p>
 
+> **⚠️ Environment Determinism Fix.** The upstream RoboCasa `_reset_internal()` uses three random sources that gymnasium's `self.np_random` does NOT control:
+> 1. Python `random` module (global)
+> 2. global `np.random`
+> 3. robosuite's `self.rng` (a `np.random.Generator`, set once in `__init__` and never updated by subsequent `reset(seed=...)` calls)
+>
+> As a result, `env.reset(seed=42)` does **not** produce deterministic initial states out of the box — `sim.data.qpos` varies on every reset, causing ~7% run-to-run std across eval runs.
+>
+> **This fork fixes it** in `robocasa/utils/gym_utils/gymnasium_groot.py`: `GrootRoboCasaEnv.reset()` now seeds all three sources before calling `super().reset()`. With this fix, `reset(seed=42)` produces identical `qpos` every time.
+>
+> **⚠️ This only addresses environment-side randomness.** For full eval reproducibility, you must also fix **model-side randomness**: ensure your denoise/diffusion action head accepts a `seed` and seeds its noise generator (`torch.Generator(device='cpu').manual_seed(seed)`), and configure CUDA determinism (`CUBLAS_WORKSPACE_CONFIG=:4096:8`, `torch.backends.cudnn.deterministic=True`). Both sides must be fixed — otherwise the same env seed + same checkpoint still produces different actions on each run.
+
 This repository contains the official release of simulation environments for the GR-1 Tabletop Tasks developed for NVIDIA's general-purpose humanoid foundation models: "*GR00T N1: An Open Foundation Model for Generalist Humanoid Robots*." Selected task setup images are shown above.
 
 [[Website]](https://developer.nvidia.com/isaac/gr00t) [[News]](https://research.nvidia.com/publication/2025-03_nvidia-isaac-gr00t-n1-open-foundation-model-humanoid-robots) [[Paper]](https://arxiv.org/abs/2503.14734)
